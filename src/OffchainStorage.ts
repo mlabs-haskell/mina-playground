@@ -1,4 +1,4 @@
-import { Field, MerkleTree } from 'snarkyjs';
+import { Field, MerkleTree, Poseidon } from 'snarkyjs';
 
 export { OffchainStorage };
 
