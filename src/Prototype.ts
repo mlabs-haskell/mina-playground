@@ -91,17 +91,17 @@ export class ProposalStatus extends Field {
   }
 }
 
-export class GovernanceParameters extends CircuitValue {
+export class GovernanceParameters extends Struct({
   /**
    * How many governance tokens are required to transit from Draft to Voting
    * Ready.
    */
-  @prop create: UInt64
-
+  create: UInt64,
   /**
    * How many votes are required for an outcome to pass.
    */
-  @prop quorum: UInt64
+  quorum: UInt64
+}) {
 
   getHash(): Field {
     return Poseidon.hash(this.getFields());

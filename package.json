@@ -46,7 +46,8 @@
   },
   "peerDependencies": {
     "snarkyjs": "0.12.*"
+  },
+  "dependencies": {
+    "cmd-ts": "^0.13.0"
   }
 }
-
-

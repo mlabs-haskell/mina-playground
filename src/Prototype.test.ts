@@ -30,7 +30,10 @@ describe('full workflow', () => {
   let proposalStorage: OffchainStorage<Proposal>;
 
   const governanceParameters = new GovernanceParameters(
-    UInt64.from(100), UInt64.from(100_000)
+    {
+      create: UInt64.from(100),
+      quorum: UInt64.from(100_000)
+    }
   );
 
   beforeAll(async () => {
