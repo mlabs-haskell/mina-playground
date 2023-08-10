@@ -31,4 +31,10 @@ class OffchainStorage<
   getRoot(): Field {
     return this.merkleTree.getRoot();
   }
+
+  delete(key: bigint): boolean {
+    const exists = super.delete(key);
+    this.merkleTree.setLeaf(key, new Field(0));
+    return exists;
+  }
 }
