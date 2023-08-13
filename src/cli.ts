@@ -249,6 +249,36 @@ const voteWithStake = command({
   },
 })
 
+const listStakes = command({
+  name: 'listStakes',
+  args: {
+    all: flag({
+      long: "all"
+    })
+  },
+  handler: async (args) => {
+    console.log(Array.from(stakeStorage.entries())
+      .filter(([_, stake]): boolean =>
+        args.all ||
+        stake.owner.equals(userPublicKey).toBoolean()));
+  }
+});
+
+const listProposals = command({
+  name: 'listProposals',
+  args: {
+    all: flag({
+      long: "all"
+    })
+  },
+  handler: async (args) => {
+    console.log(Array.from(proposalStorage.entries())
+      .filter(([_, proposal]): boolean =>
+        args.all ||
+        proposal.status.equals(ProposalStatus.FINISHED).not().toBoolean()));
+  }
+});
+
 const cmd = subcommands({
   name: "zkagora",
   cmds: {
@@ -257,7 +287,9 @@ const cmd = subcommands({
     destroyStake,
     createProposal,
     advanceProposal,
-    voteWithStake
+    voteWithStake,
+    listStakes,
+    listProposals
   }
 });
 
