@@ -1,5 +1,6 @@
 # NodeJS
 node_modules
+dist
 build
 coverage
 
@@ -12,4 +13,9 @@ coverage
 # Never commit keys to Git!
 keys
 
+# Show off
 demo
+
+# Nix
+result
+result-*

@@ -5,7 +5,7 @@
     "lib": [
       "esnext"
     ],
-    "outDir": "./build",
+    "outDir": "./dist",
     "rootDir": ".",
     "strict": true,
     "strictPropertyInitialization": false, // to enable generic constructors, e.g. on CircuitValue
