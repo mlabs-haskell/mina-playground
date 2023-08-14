@@ -107,12 +107,17 @@ export class Env {
     if (!txId.isSuccess)
       throw "failed to send tx";
 
-    console.log("tx sent", txId.hash());
+    const txIdHash = txId.hash();
+
+    console.log("tx sent", txIdHash);
     console.log("waiting...");
 
     txId.wait();
 
+
     console.log("tx confirmed");
+    console.log("explorer link",
+      `https://berkeley.minaexplorer.com/transaction/${txIdHash}`)
   };
 
   public static async withEnv<R>(app: ((env: Env) => Promise<R>),
