@@ -13,7 +13,7 @@ import { Env } from "./Env";
 const configFile = "./config.json";
 
 function bigIntMax(values: Array<bigint>): bigint {
-  return values.reduce((m, e) => e > m ? e : m);
+  return values.reduce((m, e) => e > m ? e : m, BigInt(0));
 }
 
 await Env.withEnv(
