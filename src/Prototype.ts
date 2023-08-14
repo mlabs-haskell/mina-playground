@@ -20,10 +20,9 @@
  */
 import {
   AccountUpdate, Bool, CircuitValue, Field, Int64, MerkleTree,
-  MerkleWitness, Poseidon, Provable, PublicKey, SmartContract, State, Struct,
+  MerkleWitness, Permissions, Poseidon, Provable, PublicKey, SmartContract, State, Struct,
   UInt64, method, prop, state
 } from "snarkyjs";
-import * as snarkyjs from "snarkyjs";
 
 /**
  * State of the proposal finite state machine.
@@ -277,7 +276,6 @@ export class Governor extends SmartContract {
     this.proposalTreeRoot.set(EMPTY_PROPOSAL_TREE.getRoot());
     this.stakeTreeRoot.set(EMPTY_STAKE_TREE.getRoot());
 
-    const Permissions = snarkyjs.Permissions;
     this.account.permissions.set({
       ...Permissions.default(),
       send: Permissions.proof(),

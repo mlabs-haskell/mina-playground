@@ -1,1 +1,1 @@
-import {} from './Prototype';
+import './Prototype';
