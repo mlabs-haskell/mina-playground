@@ -101,14 +101,8 @@ export class GovernanceParameters extends Struct({
    */
   quorum: UInt64
 }) {
-
   getHash(): Field {
-    return Poseidon.hash(this.getFields());
-  }
-
-  getFields(): Field[] {
-    return this.create.toFields()
-      .concat(this.quorum.toFields())
+    return Poseidon.hash(GovernanceParameters.toFields(this));
   }
 }
 
@@ -168,13 +162,7 @@ export class Proposal extends Struct({
   voteNo: UInt64,
 }) {
   getHash(): Field {
-    return Poseidon.hash(
-      this.id.toFields()
-        .concat(this.parameters.getFields())
-        .concat([this.status])
-        .concat(this.voteYes.toFields())
-        .concat(this.voteNo.toFields())
-    );
+    return Poseidon.hash(Proposal.toFields(this));
   }
 }
 
@@ -204,12 +192,6 @@ export class StakeLock extends Struct({
    */
   votedYes: Bool
 }) {
-  getFields(): Field[] {
-    return this.used.toFields()
-      .concat(this.proposalId.toFields())
-      .concat(this.isCreator.toFields())
-      .concat(this.votedYes.toFields());
-  }
 }
 
 export class Stake extends Struct({
@@ -231,10 +213,7 @@ export class Stake extends Struct({
   lockedBy: StakeLock
 }) {
   getHash(): Field {
-    return Poseidon.hash(
-      this.owner.toFields()
-        .concat(this.amount.toFields())
-        .concat(this.lockedBy.getFields()));
+    return Poseidon.hash(Stake.toFields(this));
   }
 }
 
