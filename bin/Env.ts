@@ -1,4 +1,4 @@
-import { Account, Mina, PrivateKey, PublicKey, UInt64 } from "snarkyjs";
+import { Account, Mina, PrivateKey, PublicKey, UInt64, fetchAccount } from "snarkyjs";
 import { OffchainStorage } from "../src/OffchainStorage";
 import { GovernanceParameters, Governor, PROPOSAL_TREE_HEIGHT, Proposal, STAKE_TREE_HEIGHT, Stake } from "../src/Prototype";
 import fs from 'fs/promises';
@@ -111,6 +111,8 @@ export class Env {
       sender: this.userPublicKey,
       fee: this.config.fee * 1e9
     };
+    await fetchAccount({ publicKey: this._governor!.address });
+
     const txn = await Mina.transaction(feePayerSpec, txFn);
 
     await txn.prove();
