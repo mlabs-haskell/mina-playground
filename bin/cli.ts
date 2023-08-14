@@ -226,10 +226,15 @@ await Env.withEnv(
         })
       },
       handler: async (args) => {
-        console.log(Array.from(env.stakeStorage.entries())
-          .filter(([_, stake]): boolean =>
-            args.all ||
-            stake.owner.equals(env.userPublicKey).toBoolean()));
+        console.dir(Array.from(env.stakeStorage.entries())
+          .filter(
+            ([_, stake]): boolean =>
+              args.all ||
+              stake.owner.equals(env.userPublicKey).toBoolean())
+          .map(
+            ([idx, stake]) =>
+              [idx, JSON.parse(JSON.stringify(stake, null, 2)) as Object]),
+          { depth: null });
       }
     });
 
@@ -241,10 +246,15 @@ await Env.withEnv(
         })
       },
       handler: async (args) => {
-        console.log(Array.from(env.proposalStorage.entries())
-          .filter(([_, proposal]): boolean =>
-            args.all ||
-            proposal.status.equals(ProposalStatus.FINISHED).not().toBoolean()));
+        console.dir(Array.from(env.proposalStorage.entries())
+          .filter(
+            ([_, proposal]): boolean =>
+              args.all ||
+              proposal.status.equals(ProposalStatus.FINISHED).not().toBoolean())
+          .map(
+            ([idx, proposal]) =>
+              [idx, JSON.parse(JSON.stringify(proposal, null, 2)) as Object]),
+          { depth: null });
       }
     });
 
