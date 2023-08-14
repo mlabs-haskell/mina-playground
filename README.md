@@ -1,25 +1,20 @@
-# Mina zkApp: Mina Playground
-
-This template uses TypeScript.
+# zkAgora: [Agora](https://github.com/Liqwid-Labs/agora) on Mina
 
 ## How to build
 
 ```sh
-npm run build
+nix build .#default
 ```
 
 ## How to run tests
 
 ```sh
-npm run test
-npm run testw # watch mode
+nix build .#checks.x86_64-linux.default
 ```
 
-## How to run coverage
+## How to run command line tools
 
-```sh
-npm run coverage
-```
+<!--TODO-->
 
 ## License
 

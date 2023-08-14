@@ -8,13 +8,13 @@ import { FeePayerSpec } from "snarkyjs/dist/node/lib/mina";
 function proposalStorageToJson(proposalTree: OffchainStorage<Proposal>): string {
   return JSON.stringify(
     Array.from(proposalTree.entries()).map(([k, v]) =>
-      [k.toString(), v]));
+      [k.toString(), v]), null, 2);
 }
 
 function stakeStorageToJson(stakeTree: OffchainStorage<Stake>): string {
   return JSON.stringify(
     Array.from(stakeTree.entries()).map(([k, v]) =>
-      [k.toString(), v]));
+      [k.toString(), v]), null, 2);
 }
 
 function jsonToProposalStorage(json: string): OffchainStorage<Proposal> {
@@ -197,7 +197,7 @@ export class Env {
 
     if (writeBackConfig) {
       console.log("updated config", env._config);
-      await fs.writeFile(configFilename, JSON.stringify(env._config));
+      await fs.writeFile(configFilename, JSON.stringify(env._config, null, 2));
     }
 
     return ret;
