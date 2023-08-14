@@ -86,7 +86,7 @@ await Env.withEnv(
           new ProposalMerkleTreeWitness(env.proposalStorage.getWitness(proposalIndex));
         let newProposal: Proposal
         let newStake: Stake
-        env.submitTx(() => {
+        await env.submitTx(() => {
           [newStake, newProposal] =
             env.governor.createProposal(
               env.governanceParameters,
@@ -129,7 +129,7 @@ await Env.withEnv(
                   process.exit(1);
                 })();
 
-        env.submitTx(txFn);
+        await env.submitTx(txFn);
 
         env.proposalStorage.set(index, newProposal!);
 
@@ -165,7 +165,7 @@ await Env.withEnv(
         let newStake: Stake
         let newProposal: Proposal
 
-        env.submitTx(() => {
+        await env.submitTx(() => {
           [newStake, newProposal] =
             env.governor.unlockStake(stake, stakeWitness, proposal, proposalWitness);
         });
@@ -203,7 +203,7 @@ await Env.withEnv(
         let newStake: Stake
         let newProposal: Proposal
 
-        env.submitTx(() => {
+        await env.submitTx(() => {
           [newStake, newProposal] =
             env.governor.vote(
               stake,
