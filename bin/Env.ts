@@ -69,7 +69,7 @@ export class Env {
   readonly governanceParameters: GovernanceParameters =
     new GovernanceParameters({
       create: UInt64.from(100),
-      quorum: UInt64.from(100_000)
+      quorum: UInt64.from(1_000)
     });
 
   private _governor?: Governor;
