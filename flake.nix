@@ -41,6 +41,20 @@
           runHook postInstall
         '';
       };
+      zkAgoraTests =  pkgs.stdenv.mkDerivation {
+        name = "mina-playground-tests";
+        version = "0.1.0";
+        src = gitignore.lib.gitignoreSource ./.;
+        buildInputs = [nodejs];
+        buildPhase = ''
+          ln -sf ${nodeDeps}/lib/node_modules ./node_modules
+          export PATH="${nodeDeps}/bin:$PATH"
+          npm test
+        '';
+        installPhase = '' 
+          touch $out
+        '';
+      };
       runNode2Nix = pkgs.writeShellScriptBin "runNode2Nix" ''
         ${pkgs.node2nix}/bin/node2nix \
         -${builtins.toString nodeMajorVersion} \
@@ -65,6 +79,7 @@
         inherit zkAgora;
         default = zkAgora;
       };
+      checks.default = zkAgoraTests;
       devShells = {
         default = pkgs.mkShell {
           buildInputs = [
