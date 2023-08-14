@@ -19,15 +19,34 @@ function stakeStorageToJson(stakeTree: OffchainStorage<Stake>): string {
 
 function jsonToProposalStorage(json: string): OffchainStorage<Proposal> {
   const storage = new OffchainStorage<Proposal>(PROPOSAL_TREE_HEIGHT);
-  (JSON.parse(json) as Array<[string, any]>).
-    forEach(([k, v]) => storage.set(BigInt(k), new Proposal(v)));
+  (JSON.parse(json) as Array<[string, {
+    id: string;
+    parameters: {
+      create: string;
+      quorum: string;
+    };
+    status: string;
+    voteYes: string;
+    voteNo: string;
+  }]>).
+    forEach(([k, v]) => storage.set(BigInt(k),
+      new Proposal(Proposal.fromJSON(v))));
   return storage;
 }
 
 function jsonToStakeStorage(json: string): OffchainStorage<Stake> {
   const storage = new OffchainStorage<Stake>(STAKE_TREE_HEIGHT);
-  (JSON.parse(json) as Array<[string, any]>).
-    forEach(([k, v]) => storage.set(BigInt(k), new Stake(v)));
+  (JSON.parse(json) as Array<[string, {
+    owner: string;
+    amount: string;
+    lockedBy: {
+      used: boolean;
+      proposalId: string;
+      isCreator: boolean;
+      votedYes: boolean;
+    };
+  }]>).
+    forEach(([k, v]) => storage.set(BigInt(k), new Stake(Stake.fromJSON(v))));
   return storage;
 }
 
